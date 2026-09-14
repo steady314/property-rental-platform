@@ -1,0 +1,21 @@
+.property-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+}
+.properties-page {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 60px 24px;
+
+}
+.properties-header h1 {
+    font-size: 36px;
+    margin-bottom: 10px;
+
+}
+.properties-header p {
+    color: #666;
+    font-size: 17px;
+
+}
