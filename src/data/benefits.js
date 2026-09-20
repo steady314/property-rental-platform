@@ -11,3 +11,4 @@ const benefits = [
         description: "Request a property viewing when you find the right place."
     },
 ];
+export default benefits;

@@ -4,6 +4,7 @@ import Home from "./pages/Home";
 import Properties from "./pages/Properties";
 import Login from "./pages/Login";
 import Favorites from "./pages/Favorites";
+import PropertyDetails from "./pages/PropertyDetails";
 
 function App() {
   return(
@@ -14,6 +15,7 @@ function App() {
         <Route path="/properties" element={<Properties />} />
         <Route path="/favorites" element={<Favorites />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/properties/:id" element={<PropertyDetails />} />
       </Routes>
     </BrowserRouter>
   );

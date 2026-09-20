@@ -1,4 +1,6 @@
 import "./PropertyCard.css";
+import { Link } from "react-router-dom";
+
 function PropertyCard({ property }) {
     return(
         <article className="property-card">
@@ -11,7 +13,7 @@ function PropertyCard({ property }) {
                <p className="property-details">{property.size} sq ft</p>
                <p className="property-type">{property.type}</p>
                {property.furnished && <p className="property-furnished">Furnished</p>}
-               <button>View Property</button>
+               <Link to={`/properties/${property.id}`}>View Property</Link>
             </div>
         </article>
     )
