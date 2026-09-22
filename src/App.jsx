@@ -6,6 +6,7 @@ import Login from "./pages/Login";
 import Favorites from "./pages/Favorites";
 import PropertyDetails from "./pages/PropertyDetails";
 import { FavoritesProvider } from "./context/FavoritesContext";
+import NotFound from "./pages/NotFound";
 
 function App() {
   return(
@@ -18,6 +19,7 @@ function App() {
           <Route path="/favorites" element={<Favorites />} />
           <Route path="/login" element={<Login />} />
           <Route path="/properties/:id" element={<PropertyDetails />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </FavoritesProvider>
     </BrowserRouter>
