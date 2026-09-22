@@ -5,19 +5,33 @@ function PropertyCard({ property, isFavorite, onToggleFavorite }) {
 
     return(
         <article className="property-card">
-            <img src={property.images[0]} alt={property.title} />
+            <div className="property-image-wrapper">
+                <img src={property.images[0]} alt={property.title}/>
+                {property.furnished && (
+                    <span className="property-badge">
+                        Furnished
+                    </span>
+                )}
+                <button className="favorite-button" onClick={() => onToggleFavorite(property.id)}
+                aria-label={
+                    isFavorite ? `Remove ${property.title} from favorite`
+                    : `Add ${property.title} to favorites`
+                }>{isFavorite ? "❤" : "🤍"}</button>
+            </div>
             <div className="property-card-content">
-               <h3>{property.title}</h3>
-               <p className="property-location">{property.location}</p>
-               <p className="property-price">#{property.price.toLocaleString()} /month</p>
-               <p className="property-details">{property.bedrooms} Bedrooms . {property.bathrooms} Bathrooms</p>
-               <p className="property-details">{property.size} sq ft</p>
-               <p className="property-type">{property.type}</p>
-               {property.furnished && <p className="property-furnished">Furnished</p>}
-               <button onClick={() => onToggleFavorite(property.id)}>{isFavorite ? "Remove favorite" : "Add to Favorites"}</button>
-               <Link to={`/properties/${property.id}`}>View Property</Link>
+                <p className="property-type">{property.type}</p>
+                <h3>{property.title}</h3>
+                <p className="property-location">{property.location}</p>
+                <p className="property-price">#{property.price.toLocaleString()}
+                <span> / month</span></p>
+                <div className="property-details">
+                    <span>{property.bedrooms} Beds</span>
+                    <span>{property.bathrooms} Baths</span>
+                    <span>{property.size} sq ft</span>
+                </div>
+                <Link className="property-button" to={`/properties/${property.id}`}>View Property</Link>
             </div>
         </article>
-    )
+    );
 }
 export default PropertyCard;
