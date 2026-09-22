@@ -5,18 +5,21 @@ import Properties from "./pages/Properties";
 import Login from "./pages/Login";
 import Favorites from "./pages/Favorites";
 import PropertyDetails from "./pages/PropertyDetails";
+import { FavoritesProvider } from "./context/FavoritesContext";
 
 function App() {
   return(
     <BrowserRouter>
-      <Navbar />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/properties" element={<Properties />} />
-        <Route path="/favorites" element={<Favorites />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/properties/:id" element={<PropertyDetails />} />
-      </Routes>
+      <FavoritesProvider>
+        <Navbar />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/properties" element={<Properties />} />
+          <Route path="/favorites" element={<Favorites />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/properties/:id" element={<PropertyDetails />} />
+        </Routes>
+      </FavoritesProvider>
     </BrowserRouter>
   );
 }

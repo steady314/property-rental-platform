@@ -1,0 +1,17 @@
+.favorites-page {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 60px 24px;
+}
+.favorites-header {
+    margin-bottom: 40px;
+}
+.favorites-header h1 {
+    margin-bottom: 10px;
+}
+.favorites-header p {
+    color: #666
+}
+.favorites-empty {
+    color: #666;
+}

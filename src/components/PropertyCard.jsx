@@ -1,7 +1,8 @@
 import "./PropertyCard.css";
 import { Link } from "react-router-dom";
 
-function PropertyCard({ property }) {
+function PropertyCard({ property, isFavorite, onToggleFavorite }) {
+
     return(
         <article className="property-card">
             <img src={property.images[0]} alt={property.title} />
@@ -13,6 +14,7 @@ function PropertyCard({ property }) {
                <p className="property-details">{property.size} sq ft</p>
                <p className="property-type">{property.type}</p>
                {property.furnished && <p className="property-furnished">Furnished</p>}
+               <button onClick={() => onToggleFavorite(property.id)}>{isFavorite ? "Remove favorite" : "Add to Favorites"}</button>
                <Link to={`/properties/${property.id}`}>View Property</Link>
             </div>
         </article>
