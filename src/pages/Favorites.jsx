@@ -1,7 +1,8 @@
-import PropertyCard from "../components/PropertyCard";
+
 import properties from "../data/properties";
 import { useFavorites } from "../context/FavoritesContext";
 import "./Favorites.css";
+import PropertyGrid from "../components/PropertyGrid";
 
 function Favorites() {
     const { favorites, toggleFavorite } = useFavorites();
@@ -17,11 +18,7 @@ function Favorites() {
             {favoriteProperties.length === 0 ? (
                 <p className="favorites-empty">You haven't saved any property yet.</p>
             ) : (
-                <section className="property-grid">
-                   {favoriteProperties.map((property) => (<PropertyCard key={property.id} property={property} isFavorite={true}
-                       onToggleFavorite={toggleFavorite} />
-                   ))}
-                </section>
+                <PropertyGrid properties={favoriteProperties} favorites={favorites} onToggleFavorite={toggleFavorite}/>
                )}
         </main>
     );
