@@ -7,20 +7,24 @@ import Favorites from "./pages/Favorites";
 import PropertyDetails from "./pages/PropertyDetails";
 import { FavoritesProvider } from "./context/FavoritesContext";
 import NotFound from "./pages/NotFound";
+import Footer from "./components/Footer";
 
 function App() {
   return(
     <BrowserRouter>
       <FavoritesProvider>
         <Navbar />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/properties" element={<Properties />} />
-          <Route path="/favorites" element={<Favorites />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/properties/:id" element={<PropertyDetails />} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
+        <main className="site-content">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/properties" element={<Properties />} />
+            <Route path="/favorites" element={<Favorites />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/properties/:id" element={<PropertyDetails />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </main>
+        <Footer />
       </FavoritesProvider>
     </BrowserRouter>
   );

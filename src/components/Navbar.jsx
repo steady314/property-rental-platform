@@ -6,17 +6,18 @@ function Navbar() {
     const { favorites } = useFavorites();
 
     return(
-        <nav>
-            <h1>Property rental</h1>
-            <div>
-                <nav>
-                    <NavLink to="/" className={({ isActive }) => isActive ? "active" : ""}>Home</NavLink>
-                    <NavLink to="/properties" className={({ isActive }) => isActive ? "active" : ""}>Properties</NavLink>
-                    <NavLink to="/favorites" className={({ isActive }) => isActive ? "active" : ""}>Favorites ({favorites.length})</NavLink>
-                    <NavLink to="/login" className={({ isActive }) => isActive ? "active" : ""}>Login</NavLink>
-                </nav>
+        <header className="site-header">
+           <nav className="navbar">
+               <NavLink to="/" className="navbar-logo">Property Rental</NavLink>
+               <div className="navbar-links">
+                   <NavLink to="/" className={({ isActive }) => isActive ? "active" : ""}>Home</NavLink>
+                   <NavLink to="/properties" className={({ isActive }) => isActive ? "active" : ""}>Properties</NavLink>
+                   <NavLink to="/favorites" className={({ isActive }) => isActive ? "active" : ""}>Favorites 
+                   <span className="favorite-count">({favorites.length})</span></NavLink>
+                   <NavLink to="/login" className={({ isActive }) => isActive ? "active" : ""}>Login</NavLink>
             </div>
         </nav>
+    </header>
     );
 }
 export default Navbar;
