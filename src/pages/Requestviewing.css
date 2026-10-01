@@ -1,0 +1,151 @@
+.request-page {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 60px 24px;
+}
+
+.request-card {
+  padding: 36px;
+  border: 1px solid #e5e5e5;
+  border-radius: 14px;
+  background: white;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.05);
+}
+
+.request-header {
+  margin-bottom: 30px;
+}
+
+.request-type {
+  margin-bottom: 8px;
+  color: #666;
+  font-size: 13px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.request-header h1 {
+  margin-bottom: 10px;
+  font-size: 32px;
+}
+
+.request-header > p:last-child {
+  color: #666;
+  line-height: 1.6;
+}
+
+.request-property {
+  margin-bottom: 30px;
+  padding: 20px;
+  border-radius: 10px;
+  background: #f7f7f7;
+}
+
+.request-property h2 {
+  margin-bottom: 8px;
+  font-size: 20px;
+}
+
+.request-property p {
+  margin-bottom: 10px;
+  color: #666;
+}
+
+.request-property strong {
+  font-size: 18px;
+}
+
+.request-form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.form-group label span {
+  color: #777;
+  font-weight: normal;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 13px 14px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background: white;
+  color: #222;
+  font: inherit;
+  outline: none;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  border-color: #222;
+}
+
+.form-group textarea {
+  resize: vertical;
+}
+
+.form-error {
+  margin-bottom: 16px;
+  color: #c62828;
+  font-size: 14px;
+}
+
+.request-button {
+  width: 100%;
+  padding: 14px;
+  border: none;
+  border-radius: 8px;
+  background: #222;
+  color: white;
+  font-size: 15px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.request-button:hover {
+  background: #000;
+}
+
+.request-card > p {
+  margin: 15px 0;
+  color: #666;
+  line-height: 1.6;
+}
+
+.request-card > a {
+  color: #222;
+  font-weight: bold;
+}
+
+@media (max-width: 600px) {
+  .request-page {
+    padding: 40px 16px;
+  }
+
+  .request-card {
+    padding: 24px 20px;
+  }
+
+  .request-header h1 {
+    font-size: 26px;
+  }
+
+  .request-form-row {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+}

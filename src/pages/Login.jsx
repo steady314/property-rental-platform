@@ -1,5 +1,8 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import {
+  Link,
+  useNavigate,
+} from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import "./Auth.css";
 function Login() {
@@ -12,7 +15,9 @@ function Login() {
     event.preventDefault();
     setError("");
     if (!email || !password) {
-      setError("Please enter your email and password.");
+      setError(
+        "Please enter your email and password."
+      );
       return;
     }
     const result = login(email, password);
@@ -45,6 +50,7 @@ function Login() {
                 setEmail(event.target.value)
               }
               placeholder="you@example.com"
+              autoComplete="email"
             />
           </div>
           <div className="form-group">
@@ -59,6 +65,7 @@ function Login() {
                 setPassword(event.target.value)
               }
               placeholder="Enter your password"
+              autoComplete="current-password"
             />
           </div>
           {error && (

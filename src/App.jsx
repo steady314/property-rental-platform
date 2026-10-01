@@ -10,25 +10,32 @@ import NotFound from "./pages/NotFound";
 import Footer from "./components/Footer";
 import { AuthProvider } from "./context/AuthContext";
 import Register from "./pages/Register";
+import MyRequests from "./pages/MyRequests";
+import { ViewingRequestsProvider, } from "./context/ViewingRequestsContext";
+import RequestViewing from "./pages/RequestViewing";
 
 function App() {
   return(
     <BrowserRouter>
       <AuthProvider>
         <FavoritesProvider>
-          <Navbar />
-          <main className="site-content">
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/properties" element={<Properties />} />
-            <Route path="/favorites" element={<Favorites />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
-            <Route path="/properties/:id" element={<PropertyDetails />} />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-          </main>
-          <Footer />
+          <ViewingRequestsProvider>
+            <Navbar />
+            <main className="site-content">
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/properties" element={<Properties />} />
+              <Route path="/favorites" element={<Favorites />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/register" element={<Register />} />
+              <Route path="/my-requests" element={<MyRequests />} />
+              <Route path="/properties/:id" element={<PropertyDetails />} />
+              <Route path="*" element={<NotFound />} />
+              <Route path="/properties/:id/request-viewing" element={<RequestViewing />} />
+            </Routes>
+            </main>
+            <Footer />
+          </ViewingRequestsProvider>
         </FavoritesProvider>
       </AuthProvider>
     </BrowserRouter>

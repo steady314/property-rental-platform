@@ -1,0 +1,135 @@
+.requests-page {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 60px 24px;
+}
+
+.requests-header {
+  margin-bottom: 35px;
+}
+
+.requests-header p {
+  margin-bottom: 8px;
+  color: #666;
+  font-size: 13px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.requests-header h1 {
+  margin-bottom: 8px;
+  font-size: 34px;
+}
+
+.requests-header span {
+  color: #666;
+}
+
+.requests-list {
+  display: grid;
+  gap: 16px;
+}
+
+.request-item {
+  padding: 24px;
+  border: 1px solid #e5e5e5;
+  border-radius: 12px;
+  background: white;
+}
+
+.request-item-main {
+  display: flex;
+  justify-content: space-between;
+  gap: 30px;
+}
+
+.request-status {
+  display: inline-block;
+  margin-bottom: 10px;
+  padding: 5px 9px;
+  border-radius: 20px;
+  background: #f1f1f1;
+  color: #444;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.request-item h2 {
+  margin-bottom: 6px;
+  font-size: 20px;
+}
+
+.request-location {
+  color: #666;
+}
+
+.request-date {
+  min-width: 120px;
+  text-align: right;
+}
+
+.request-date strong,
+.request-date span {
+  display: block;
+}
+
+.request-date strong {
+  margin-bottom: 5px;
+}
+
+.request-date span {
+  color: #666;
+}
+
+.request-message {
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid #eee;
+  color: #555;
+  line-height: 1.6;
+}
+
+.requests-empty {
+  padding: 60px 20px;
+  border: 1px solid #e5e5e5;
+  border-radius: 12px;
+  text-align: center;
+}
+
+.requests-empty h1,
+.requests-empty h2 {
+  margin-bottom: 10px;
+}
+
+.requests-empty p {
+  margin-bottom: 20px;
+  color: #666;
+}
+
+.requests-empty a {
+  color: #222;
+  font-weight: bold;
+}
+
+@media (max-width: 600px) {
+  .requests-page {
+    padding: 40px 16px;
+  }
+
+  .requests-header h1 {
+    font-size: 28px;
+  }
+
+  .request-item {
+    padding: 20px;
+  }
+
+  .request-item-main {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .request-date {
+    text-align: left;
+  }
+}

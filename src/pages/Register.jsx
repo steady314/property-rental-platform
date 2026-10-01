@@ -1,5 +1,8 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import {
+  Link,
+  useNavigate,
+} from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import "./Auth.css";
 function Register() {
@@ -56,6 +59,7 @@ function Register() {
                 setName(event.target.value)
               }
               placeholder="Enter your name"
+              autoComplete="name"
             />
           </div>
           <div className="form-group">
@@ -70,6 +74,7 @@ function Register() {
                 setEmail(event.target.value)
               }
               placeholder="you@example.com"
+              autoComplete="email"
             />
           </div>
           <div className="form-group">
@@ -84,6 +89,7 @@ function Register() {
                 setPassword(event.target.value)
               }
               placeholder="At least 6 characters"
+              autoComplete="new-password"
             />
           </div>
           {error && (

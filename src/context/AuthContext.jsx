@@ -1,39 +1,36 @@
-import { createContext, useContext, useState } from "react";
+import {
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 const AuthContext = createContext();
 function AuthProvider({ children }) {
-  const [user, setUser] = useState(null);
-  const login = (email, password) => {
+  const [user, setUser] = useState(() => {
+    const savedUser = localStorage.getItem(
+      "propertyRentalCurrentUser"
+    );
+    return savedUser
+      ? JSON.parse(savedUser)
+      : null;
+  });
+  useEffect(() => {
+    if (user) {
+      localStorage.setItem(
+        "propertyRentalCurrentUser",
+        JSON.stringify(user)
+      );
+    } else {
+      localStorage.removeItem(
+        "propertyRentalCurrentUser"
+      );
+    }
+  }, [user]);
+  const register = (name, email, password) => {
     const storedUser = JSON.parse(
       localStorage.getItem("propertyRentalUser")
     );
-    if (!storedUser) {
-      return {
-        success: false,
-        message: "No account found. Please register first.",
-      };
-    }
-    if (
-      storedUser.email !== email ||
-      storedUser.password !== password
-    ) {
-      return {
-        success: false,
-        message: "Invalid email or password.",
-      };
-    }
-    setUser({
-      name: storedUser.name,
-      email: storedUser.email,
-    });
-    return {
-      success: true,
-    };
-  };
-  const register = (name, email, password) => {
-    const existingUser = JSON.parse(
-      localStorage.getItem("propertyRentalUser")
-    );
-    if (existingUser) {
+    if (storedUser) {
       return {
         success: false,
         message: "An account already exists.",
@@ -56,6 +53,34 @@ function AuthProvider({ children }) {
       success: true,
     };
   };
+  const login = (email, password) => {
+    const storedUser = JSON.parse(
+      localStorage.getItem("propertyRentalUser")
+    );
+    if (!storedUser) {
+      return {
+        success: false,
+        message:
+          "No account found. Please register first.",
+      };
+    }
+    if (
+      storedUser.email !== email ||
+      storedUser.password !== password
+    ) {
+      return {
+        success: false,
+        message: "Invalid email or password.",
+      };
+    }
+    setUser({
+      name: storedUser.name,
+      email: storedUser.email,
+    });
+    return {
+      success: true,
+    };
+  };
   const logout = () => {
     setUser(null);
   };
@@ -63,8 +88,8 @@ function AuthProvider({ children }) {
     <AuthContext.Provider
       value={{
         user,
-        login,
         register,
+        login,
         logout,
       }}
     >
@@ -75,4 +100,7 @@ function AuthProvider({ children }) {
 function useAuth() {
   return useContext(AuthContext);
 }
-export { AuthProvider, useAuth };
+export {
+  AuthProvider,
+  useAuth,
+};

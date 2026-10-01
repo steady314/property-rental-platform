@@ -1,8 +1,9 @@
 import "./PropertyCard.css";
 import { Link } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 
 function PropertyCard({ property, isFavorite, onToggleFavorite }) {
-
+    const { user } = useAuth();
     return(
         <article className="property-card">
             <div className="property-image-wrapper">
@@ -12,11 +13,24 @@ function PropertyCard({ property, isFavorite, onToggleFavorite }) {
                         Furnished
                     </span>
                 )}
-                <button className="favorite-button" onClick={() => onToggleFavorite(property.id)}
-                aria-label={
-                    isFavorite ? `Remove ${property.title} from favorite`
-                    : `Add ${property.title} to favorites`
-                }>{isFavorite ? "❤" : "🤍"}</button>
+                <button
+  className="favorite-button"
+  onClick={() => {
+    if (!user) {
+      alert("Please log in to save properties.");
+      return;
+    }
+
+    onToggleFavorite(property.id);
+  }}
+  aria-label={
+    isFavorite
+      ? `Remove ${property.title} from favorites`
+      : `Add ${property.title} to favorites`
+  }
+>
+  {isFavorite ? "♥" : "♡"}
+</button>
             </div>
             <div className="property-card-content">
                 <p className="property-type">{property.type}</p>
