@@ -2,20 +2,31 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import "./Auth.css";
-function Login() {
+function Register() {
   const navigate = useNavigate();
-  const { login } = useAuth();
+  const { register } = useAuth();
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const handleSubmit = (event) => {
     event.preventDefault();
     setError("");
-    if (!email || !password) {
-      setError("Please enter your email and password.");
+    if (!name || !email || !password) {
+      setError("Please fill in all fields.");
       return;
     }
-    const result = login(email, password);
+    if (password.length < 6) {
+      setError(
+        "Password must be at least 6 characters."
+      );
+      return;
+    }
+    const result = register(
+      name,
+      email,
+      password
+    );
     if (!result.success) {
       setError(result.message);
       return;
@@ -26,19 +37,33 @@ function Login() {
     <main className="auth-page">
       <div className="auth-card">
         <div className="auth-header">
-          <h1>Welcome Back</h1>
+          <h1>Create an Account</h1>
           <p>
-            Log in to manage your saved properties
-            and viewing requests.
+            Create your account to save properties
+            and request viewings.
           </p>
         </div>
         <form onSubmit={handleSubmit}>
           <div className="form-group">
-            <label htmlFor="login-email">
+            <label htmlFor="name">
+              Full Name
+            </label>
+            <input
+              id="name"
+              type="text"
+              value={name}
+              onChange={(event) =>
+                setName(event.target.value)
+              }
+              placeholder="Enter your name"
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="register-email">
               Email
             </label>
             <input
-              id="login-email"
+              id="register-email"
               type="email"
               value={email}
               onChange={(event) =>
@@ -48,17 +73,17 @@ function Login() {
             />
           </div>
           <div className="form-group">
-            <label htmlFor="login-password">
+            <label htmlFor="register-password">
               Password
             </label>
             <input
-              id="login-password"
+              id="register-password"
               type="password"
               value={password}
               onChange={(event) =>
                 setPassword(event.target.value)
               }
-              placeholder="Enter your password"
+              placeholder="At least 6 characters"
             />
           </div>
           {error && (
@@ -70,17 +95,17 @@ function Login() {
             className="auth-button"
             type="submit"
           >
-            Log In
+            Create Account
           </button>
         </form>
         <p className="auth-switch">
-          Don't have an account?{" "}
-          <Link to="/register">
-            Create one
+          Already have an account?{" "}
+          <Link to="/login">
+            Log in
           </Link>
         </p>
       </div>
     </main>
   );
 }
-export default Login;
+export default Register;

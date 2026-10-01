@@ -8,24 +8,29 @@ import PropertyDetails from "./pages/PropertyDetails";
 import { FavoritesProvider } from "./context/FavoritesContext";
 import NotFound from "./pages/NotFound";
 import Footer from "./components/Footer";
+import { AuthProvider } from "./context/AuthContext";
+import Register from "./pages/Register";
 
 function App() {
   return(
     <BrowserRouter>
-      <FavoritesProvider>
-        <Navbar />
-        <main className="site-content">
+      <AuthProvider>
+        <FavoritesProvider>
+          <Navbar />
+          <main className="site-content">
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/properties" element={<Properties />} />
             <Route path="/favorites" element={<Favorites />} />
             <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
             <Route path="/properties/:id" element={<PropertyDetails />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
-        </main>
-        <Footer />
-      </FavoritesProvider>
+          </main>
+          <Footer />
+        </FavoritesProvider>
+      </AuthProvider>
     </BrowserRouter>
   );
 }
