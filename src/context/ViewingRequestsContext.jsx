@@ -12,35 +12,22 @@ const ViewingRequestsContext = createContext();
 function ViewingRequestsProvider({ children }) {
   const { user } = useAuth();
 
-  const [requests, setRequests] = useState([]);
-
-  useEffect(() => {
-    if (!user) {
-      setRequests([]);
-      return;
-    }
-
+  const [requests, setRequests] = useState(() => {
     const savedRequests = localStorage.getItem(
-      `propertyRentalViewingRequests_${user.email}`
+      "propertyRentalViewingRequests"
     );
 
-    setRequests(
-      savedRequests
-        ? JSON.parse(savedRequests)
-        : []
-    );
-  }, [user]);
+    return savedRequests
+      ? JSON.parse(savedRequests)
+      : [];
+  });
 
   useEffect(() => {
-    if (!user) {
-      return;
-    }
-
     localStorage.setItem(
-      `propertyRentalViewingRequests_${user.email}`,
+      "propertyRentalViewingRequests",
       JSON.stringify(requests)
     );
-  }, [requests, user]);
+  }, [requests]);
 
   const addRequest = (request) => {
     if (!user) {
@@ -49,8 +36,13 @@ function ViewingRequestsProvider({ children }) {
 
     const newRequest = {
       id: Date.now(),
-      ...request,
+
+      userId: user.id,
+      userName: user.name,
       userEmail: user.email,
+
+      ...request,
+
       status: "Pending",
     };
 
@@ -60,11 +52,36 @@ function ViewingRequestsProvider({ children }) {
     ]);
   };
 
+  const updateRequestStatus = (
+    requestId,
+    newStatus
+  ) => {
+    setRequests((currentRequests) =>
+      currentRequests.map((request) =>
+        request.id === requestId
+          ? {
+              ...request,
+              status: newStatus,
+            }
+          : request
+      )
+    );
+  };
+
+  const userRequests = user
+    ? requests.filter(
+        (request) =>
+          request.userId === user.id
+      )
+    : [];
+
   return (
     <ViewingRequestsContext.Provider
       value={{
         requests,
+        userRequests,
         addRequest,
+        updateRequestStatus,
       }}
     >
       {children}

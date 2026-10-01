@@ -10,7 +10,7 @@ import "./MyRequests.css";
 function MyRequests() {
   const { user } = useAuth();
 
-  const { requests } =
+  const { userRequests } =
     useViewingRequests();
 
   if (!user) {
@@ -47,7 +47,7 @@ function MyRequests() {
         </div>
       </section>
 
-      {requests.length === 0 ? (
+      {userRequests.length === 0 ? (
         <div className="requests-empty">
           <h2>No viewing requests yet</h2>
 
@@ -62,7 +62,7 @@ function MyRequests() {
         </div>
       ) : (
         <section className="requests-list">
-          {requests.map((request) => (
+          {userRequests.map((request) => (
             <article
               className="request-item"
               key={request.id}

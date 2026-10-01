@@ -56,6 +56,10 @@ function Navbar() {
 
           {user ? (
             <>
+              {user.role === "manager" && (
+                <NavLink to="/manager" className={({ isActive }) => isActive ? "active" : ""}>
+                  Dashboard
+                </NavLink>)}
               <NavLink
                 to="/my-requests"
                 className={({ isActive }) =>

@@ -13,6 +13,9 @@ import Register from "./pages/Register";
 import MyRequests from "./pages/MyRequests";
 import { ViewingRequestsProvider, } from "./context/ViewingRequestsContext";
 import RequestViewing from "./pages/RequestViewing";
+import ManagerDashboard from "./pages/ManagerDashboard";
+import ManagerRequests from "./pages/ManagerRequests";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
   return(
@@ -32,6 +35,10 @@ function App() {
               <Route path="/properties/:id" element={<PropertyDetails />} />
               <Route path="*" element={<NotFound />} />
               <Route path="/properties/:id/request-viewing" element={<RequestViewing />} />
+              <Route path="/manager" element={<ProtectedRoute role="manager">
+                <ManagerDashboard /> </ProtectedRoute> } />
+              <Route path="/manager/requests" element={<ProtectedRoute role="manager"> 
+                <ManagerRequests /> </ProtectedRoute>} />
             </Routes>
             </main>
             <Footer />
