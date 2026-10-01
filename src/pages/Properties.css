@@ -1,22 +1,56 @@
-.property-search {
-    max-width: 600px;
-    margin-bottom: 40px;
+.property-filters {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 30px;
 }
-.property-search label {
-    display: block;
-    margin-bottom: 8px;
-    font-size: 14px;
-    font-weight: bold;
+.property-search,
+.property-filter {
+  min-width: 0;
 }
-.property-search input {
-    width: 100%;
-    padding: 14px 16px;
-    border: 1px solid #ccc;
-    background: white;
-    color: #222;
-    font-size: 16px;
-    outline: none;
+.property-search label,
+.property-filter label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 14px;
+  font-weight: bold;
 }
-.property-search input:focus {
-    border-color: #222;
+.property-search input,
+.property-filter input,
+.property-filter select {
+  width: 100%;
+  padding: 14px 16px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background: white;
+  color: #222;
+  font-size: 16px;
+  outline: none;
+}
+.property-search input:focus,
+.property-filter input:focus,
+.property-filter select:focus {
+  border-color: #222;
+}
+.property-results-count {
+  margin-bottom: 20px;
+  color: #666;
+  font-size: 14px;
+}
+@media (max-width: 800px) {
+  .property-filters {
+    grid-template-columns: 1fr 1fr;
+  }
+  .property-search {
+    grid-column: 1 / -1;
+  }
+}
+@media (max-width: 600px) {
+  .property-filters {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+  .property-search {
+    grid-column: auto;
+  }
 }
