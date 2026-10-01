@@ -54,3 +54,20 @@
     grid-column: auto;
   }
 }
+
+@media (max-width: 800px) {
+    .property-filters {
+        grid-template-columns: 1fr 1fr;
+    }
+    .property-search {
+        grid-column: 1/ -1;
+    }
+}
+
+@media (max-width: 600px) {
+    .property-filters {
+        grid-template-columns: 1fr;
+        gap: 14px;
+    }
+    .property-search {grid-column: auto;}
+}

@@ -6,6 +6,7 @@ function Properties() {
   const [searchTerm, setSearchTerm] = useState("");
   const [maxPrice, setMaxPrice] = useState("");
   const [bedrooms, setBedrooms] = useState("");
+  const [sortBy, setSortBy] = useState("");
   const filteredProperties = properties.filter((property) => {
     const matchesLocation = property.location
       .toLowerCase()
@@ -22,6 +23,17 @@ function Properties() {
       matchesBedrooms
     );
   });
+  const sortedProperties = [...filteredProperties].sort(
+    (a, b) => {
+      if (sortBy === "price-low") {
+        return a.price - b.price;
+      }
+      if (sortBy === "price-high") {
+        return b.price - a.price;
+      }
+      return 0;
+    }
+  );
   return (
     <main className="properties-page">
       <section className="properties-header">
@@ -81,16 +93,38 @@ function Properties() {
             <option value="4">4+ bedrooms</option>
           </select>
         </div>
+        <div className="property-filter">
+          <label htmlFor="sort-by">
+            Sort By
+          </label>
+          <select
+            id="sort-by"
+            value={sortBy}
+            onChange={(event) =>
+              setSortBy(event.target.value)
+            }
+          >
+            <option value="">
+              Recommended
+            </option>
+            <option value="price-low">
+              Price: Low to High
+            </option>
+            <option value="price-high">
+              Price: High to Low
+            </option>
+          </select>
+        </div>
       </section>
       <section className="property-results">
         <p className="property-results-count">
-          {filteredProperties.length}{" "}
-          {filteredProperties.length === 1
+          {sortedProperties.length}{" "}
+          {sortedProperties.length === 1
             ? "property"
             : "properties"}{" "}
           found
         </p>
-        {filteredProperties.length === 0 ? (
+        {sortedProperties.length === 0 ? (
           <div className="search-empty">
             <h2>No properties found</h2>
             <p>
@@ -100,7 +134,7 @@ function Properties() {
           </div>
         ) : (
           <PropertyGrid
-            properties={filteredProperties}
+            properties={sortedProperties}
           />
         )}
       </section>
