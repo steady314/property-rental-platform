@@ -3,30 +3,48 @@ import {
   Link,
   useNavigate,
 } from "react-router-dom";
+import StatusMessage from "../components/StatusMessage";
 import { useAuth } from "../context/AuthContext";
 import "./Auth.css";
+
 function Login() {
   const navigate = useNavigate();
   const { login } = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+
   const handleSubmit = (event) => {
-    event.preventDefault();
-    setError("");
-    if (!email || !password) {
-      setError(
-        "Please enter your email and password."
-      );
-      return;
-    }
-    const result = login(email, password);
-    if (!result.success) {
-      setError(result.message);
-      return;
-    }
-    navigate("/");
-  };
+  event.preventDefault();
+
+  setError("");
+
+  const cleanEmail = email.trim().toLowerCase();
+
+  if (!cleanEmail || !password) {
+    setError(
+      "Please enter your email and password."
+    );
+    return;
+  }
+
+  if (!cleanEmail.includes("@")) {
+    setError("Please enter a valid email address.");
+    return;
+  }
+
+  const result = login(
+    cleanEmail,
+    password
+  );
+
+  if (!result.success) {
+    setError(result.message);
+    return;
+  }
+
+  navigate("/");
+};
   return (
     <main className="auth-page">
       <div className="auth-card">
@@ -51,6 +69,7 @@ function Login() {
               }
               placeholder="you@example.com"
               autoComplete="email"
+              required
             />
           </div>
           <div className="form-group">
@@ -66,13 +85,14 @@ function Login() {
               }
               placeholder="Enter your password"
               autoComplete="current-password"
+              required
             />
           </div>
           {error && (
-            <p className="form-error">
-              {error}
-            </p>
-          )}
+  <StatusMessage type="error">
+    {error}
+  </StatusMessage>
+)}
           <button
             className="auth-button"
             type="submit"

@@ -49,6 +49,12 @@
     font-size: 11px;
     font-weight: bold;
 }
+.navbar-user {
+  max-width: 180px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
 .navbar-user {color: #444; font-size: 14px; font-weight: 500;}
 .navbar-logout {
     padding: 8px 12px;
@@ -61,4 +67,29 @@
 }
 .navbar-logout:hover {
     background: #f5f5f5;
+}
+@media (max-width: 800px) {
+  .navbar {
+    align-items: flex-start;
+    flex-direction: column;
+    padding-top: 18px;
+    padding-bottom: 18px;
+  }
+
+  .navbar-links {
+    width: 100%;
+    flex-wrap: wrap;
+    gap: 14px 18px;
+  }
+}
+@media (max-width: 500px) {
+  .navbar-links {
+    gap: 12px 14px;
+  }
+
+  .navbar-links a,
+  .navbar-user,
+  .navbar-logout {
+    font-size: 13px;
+  }
 }

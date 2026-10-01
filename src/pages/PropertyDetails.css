@@ -177,7 +177,7 @@ font-weight: bold;
 
 @media (max-width: 600px) {
     .property-details-page {padding: 40px 16px;}
-    .property-details-header  h1 {font-size: 30px;}
+    .property-details-header  h1 {font-size: 30px; overflow-wrap: anywhere;}
     .property-gallery {gap: 10px; margin-bottom: 35px;}
     .property-gallery img, .property-gallery img:first-child {height: 260px;}
     .property-statistics {grid-template-columns: 1fr;}

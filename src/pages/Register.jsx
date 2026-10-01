@@ -13,29 +13,43 @@ function Register() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const handleSubmit = (event) => {
-    event.preventDefault();
-    setError("");
-    if (!name || !email || !password) {
-      setError("Please fill in all fields.");
-      return;
-    }
-    if (password.length < 6) {
-      setError(
-        "Password must be at least 6 characters."
-      );
-      return;
-    }
-    const result = register(
-      name,
-      email,
-      password
+  event.preventDefault();
+
+  setError("");
+
+  const cleanName = name.trim();
+  const cleanEmail = email.trim().toLowerCase();
+
+  if (!cleanName || !cleanEmail || !password) {
+    setError("Please fill in all fields.");
+    return;
+  }
+
+  if (!cleanEmail.includes("@")) {
+    setError("Please enter a valid email address.");
+    return;
+  }
+
+  if (password.length < 6) {
+    setError(
+      "Password must be at least 6 characters."
     );
-    if (!result.success) {
-      setError(result.message);
-      return;
-    }
-    navigate("/");
-  };
+    return;
+  }
+
+  const result = register(
+    cleanName,
+    cleanEmail,
+    password
+  );
+
+  if (!result.success) {
+    setError(result.message);
+    return;
+  }
+
+  navigate("/");
+};
   return (
     <main className="auth-page">
       <div className="auth-card">
@@ -60,6 +74,7 @@ function Register() {
               }
               placeholder="Enter your name"
               autoComplete="name"
+              required
             />
           </div>
           <div className="form-group">
@@ -75,6 +90,7 @@ function Register() {
               }
               placeholder="you@example.com"
               autoComplete="email"
+              required
             />
           </div>
           <div className="form-group">
@@ -88,15 +104,17 @@ function Register() {
               onChange={(event) =>
                 setPassword(event.target.value)
               }
+              minLength={6}
               placeholder="At least 6 characters"
               autoComplete="new-password"
+              required
             />
           </div>
           {error && (
-            <p className="form-error">
-              {error}
-            </p>
-          )}
+  <StatusMessage type="error">
+    {error}
+  </StatusMessage>
+)}
           <button
             className="auth-button"
             type="submit"

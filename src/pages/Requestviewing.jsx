@@ -1,91 +1,103 @@
 import { useState } from "react";
-import {
-  Link,
-  useNavigate,
-  useParams,
-} from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 import properties from "../data/properties";
-
 import { useAuth } from "../context/AuthContext";
-import {
-  useViewingRequests,
-} from "../context/ViewingRequestsContext";
+import { useViewingRequests } from "../context/ViewingRequestsContext";
+import StatusMessage from "../components/StatusMessage";
 
 import "./RequestViewing.css";
 
 function RequestViewing() {
-  const { id } = useParams();
+  const { propertyId } = useParams();
 
   const navigate = useNavigate();
 
   const { user } = useAuth();
 
-  const { addRequest } =
-    useViewingRequests();
+  const {
+    userRequests,
+    addRequest,
+  } = useViewingRequests();
 
   const property = properties.find(
-    (property) => property.id === Number(id)
+    (item) => item.id === Number(propertyId)
   );
 
   const [date, setDate] = useState("");
   const [time, setTime] = useState("");
   const [message, setMessage] = useState("");
-
   const [error, setError] = useState("");
+  const [isSubmitting, setIsSubmitting] =
+    useState(false);
+
+  if (!user) {
+    navigate("/login");
+    return null;
+  }
 
   if (!property) {
     return (
       <main className="request-page">
-        <div className="request-card">
-          <h1>Property Not Found</h1>
-
-          <p>
-            We couldn't find the property you're
-            trying to request a viewing for.
-          </p>
-
-          <Link to="/properties">
-            Browse Properties
-          </Link>
+        <div className="request-container">
+          <StatusMessage type="error">
+            Property not found.
+          </StatusMessage>
         </div>
       </main>
     );
   }
 
-  if (!user) {
-    return (
-      <main className="request-page">
-        <div className="request-card">
-          <h1>Login Required</h1>
+  const getLocalDateString = (value = new Date()) => {
+    const year = value.getFullYear();
+    const month = String(value.getMonth() + 1).padStart(2, "0");
+    const day = String(value.getDate()).padStart(2, "0");
 
-          <p>
-            Please log in before requesting a
-            property viewing.
-          </p>
+    return `${year}-${month}-${day}`;
+  };
 
-          <button
-            className="request-button"
-            onClick={() => navigate("/login")}
-          >
-            Log In
-          </button>
-        </div>
-      </main>
-    );
-  }
+  const today = getLocalDateString();
 
   const handleSubmit = (event) => {
     event.preventDefault();
 
     setError("");
 
+    const cleanMessage = message.trim();
+
     if (!date || !time) {
       setError(
-        "Please select a preferred date and time."
+        "Please select a viewing date and time."
       );
       return;
     }
+
+    const selectedDate = new Date(`${date}T00:00:00`);
+    const todayDate = new Date(`${today}T00:00:00`);
+
+    if (selectedDate < todayDate) {
+      setError(
+        "Please select today or a future date."
+      );
+      return;
+    }
+
+    const duplicateRequest =
+      userRequests.some(
+        (request) =>
+          request.propertyId === property.id &&
+          request.date === date &&
+          request.time === time
+      );
+
+    if (duplicateRequest) {
+      setError(
+        "You already have a request for this property at that date and time."
+      );
+      return;
+    }
+
+    setIsSubmitting(true);
 
     addRequest({
       propertyId: property.id,
@@ -93,25 +105,29 @@ function RequestViewing() {
       propertyLocation: property.location,
       date,
       time,
-      message,
+      message: cleanMessage,
     });
+
+    setIsSubmitting(false);
 
     navigate("/my-requests");
   };
 
   return (
     <main className="request-page">
-      <div className="request-card">
+      <div className="request-container">
         <div className="request-header">
-          <p className="request-type">
+          <p className="request-label">
             Viewing Request
           </p>
 
-          <h1>Request a Property Viewing</h1>
+          <h1>
+            Request a Viewing
+          </h1>
 
-          <p>
-            Choose a preferred date and time for
-            viewing this property.
+          <p className="request-intro">
+            Choose a convenient date and time to
+            view this property.
           </p>
         </div>
 
@@ -120,72 +136,78 @@ function RequestViewing() {
 
           <p>{property.location}</p>
 
-          <strong>
-            ₦{property.price.toLocaleString()} / month
-          </strong>
+          <p>
+            ₦{property.price.toLocaleString()} / year
+          </p>
         </div>
 
-        <form onSubmit={handleSubmit}>
-          <div className="request-form-row">
-            <div className="form-group">
-              <label htmlFor="viewing-date">
-                Preferred Date
-              </label>
+        {error && (
+          <StatusMessage type="error">
+            {error}
+          </StatusMessage>
+        )}
 
-              <input
-                id="viewing-date"
-                type="date"
-                value={date}
-                onChange={(event) =>
-                  setDate(event.target.value)
-                }
-              />
-            </div>
+        <form
+          className="request-form"
+          onSubmit={handleSubmit}
+        >
+          <div className="form-group">
+            <label htmlFor="viewing-date">
+              Viewing Date
+            </label>
 
-            <div className="form-group">
-              <label htmlFor="viewing-time">
-                Preferred Time
-              </label>
+            <input
+              id="viewing-date"
+              type="date"
+              min={today}
+              value={date}
+              onChange={(event) =>
+                setDate(event.target.value)
+              }
+              required
+            />
+          </div>
 
-              <input
-                id="viewing-time"
-                type="time"
-                value={time}
-                onChange={(event) =>
-                  setTime(event.target.value)
-                }
-              />
-            </div>
+          <div className="form-group">
+            <label htmlFor="viewing-time">
+              Viewing Time
+            </label>
+
+            <input
+              id="viewing-time"
+              type="time"
+              value={time}
+              onChange={(event) =>
+                setTime(event.target.value)
+              }
+              required
+            />
           </div>
 
           <div className="form-group">
             <label htmlFor="viewing-message">
               Message
-              <span> (optional)</span>
             </label>
 
             <textarea
               id="viewing-message"
+              rows="5"
+              placeholder="Add any questions or information for the property manager..."
               value={message}
               onChange={(event) =>
                 setMessage(event.target.value)
               }
-              placeholder="Anything you'd like us to know?"
-              rows="5"
             />
           </div>
-
-          {error && (
-            <p className="form-error">
-              {error}
-            </p>
-          )}
 
           <button
             className="request-button"
             type="submit"
+            disabled={isSubmitting}
           >
-            Submit Viewing Request
+            {isSubmitting
+              ? "Submitting..."
+              : "Submit Viewing Request"}
           </button>
         </form>
       </div>

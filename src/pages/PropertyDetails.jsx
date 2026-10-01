@@ -51,13 +51,13 @@ function PropertyDetails() {
   const isFavorite = favorites.includes(property.id);
 
   const handleFavorite = () => {
-    if (!user) {
-      alert("Please log in to save properties.");
-      return;
-    }
+  if (!user) {
+    navigate("/login");
+    return;
+  }
 
-    toggleFavorite(property.id);
-  };
+  toggleFavorite(property.id);
+};
 
   const handleViewingRequest = () => {
     if (!user) {

@@ -1,134 +1,128 @@
 .request-page {
-  max-width: 900px;
-  margin: 0 auto;
-  padding: 60px 24px;
+  padding: 60px 20px;
+  background: #f8f8f8;
 }
 
-.request-card {
-  padding: 36px;
-  border: 1px solid #e5e5e5;
-  border-radius: 14px;
-  background: white;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.05);
+.request-container {
+  width: 100%;
+  max-width: 700px;
+  margin: 0 auto;
 }
 
 .request-header {
   margin-bottom: 30px;
 }
 
-.request-type {
+.request-label {
   margin-bottom: 8px;
   color: #666;
   font-size: 13px;
-  font-weight: bold;
+  font-weight: 600;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
 }
 
 .request-header h1 {
   margin-bottom: 10px;
+  color: #222;
   font-size: 32px;
+  line-height: 1.2;
 }
 
-.request-header > p:last-child {
+.request-intro {
   color: #666;
   line-height: 1.6;
 }
 
 .request-property {
-  margin-bottom: 30px;
+  margin-bottom: 24px;
   padding: 20px;
+  border: 1px solid #ddd;
   border-radius: 10px;
-  background: #f7f7f7;
+  background: white;
 }
 
 .request-property h2 {
   margin-bottom: 8px;
+  color: #222;
   font-size: 20px;
 }
 
 .request-property p {
-  margin-bottom: 10px;
+  margin-bottom: 6px;
   color: #666;
+  line-height: 1.5;
 }
 
-.request-property strong {
-  font-size: 18px;
+.request-property p:last-child {
+  margin-bottom: 0;
+  color: #222;
+  font-weight: 600;
 }
 
-.request-form-row {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 16px;
+.request-form {
+  padding: 28px;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  background: white;
 }
 
 .form-group {
-  margin-bottom: 20px;
+  margin-bottom: 22px;
 }
 
 .form-group label {
   display: block;
   margin-bottom: 8px;
+  color: #222;
   font-size: 14px;
-  font-weight: bold;
-}
-
-.form-group label span {
-  color: #777;
-  font-weight: normal;
+  font-weight: 600;
 }
 
 .form-group input,
 .form-group textarea {
   width: 100%;
-  padding: 13px 14px;
+  padding: 12px 14px;
   border: 1px solid #ccc;
-  border-radius: 8px;
+  border-radius: 7px;
   background: white;
   color: #222;
-  font: inherit;
-  outline: none;
+  font-family: inherit;
+  font-size: 15px;
 }
 
 .form-group input:focus,
 .form-group textarea:focus {
-  border-color: #222;
+  border-color: #555;
+  outline: none;
 }
 
 .form-group textarea {
+  min-height: 130px;
   resize: vertical;
-}
-
-.form-error {
-  margin-bottom: 16px;
-  color: #c62828;
-  font-size: 14px;
+  line-height: 1.5;
 }
 
 .request-button {
   width: 100%;
-  padding: 14px;
+  padding: 13px 18px;
   border: none;
-  border-radius: 8px;
+  border-radius: 7px;
   background: #222;
   color: white;
   font-size: 15px;
-  font-weight: bold;
+  font-weight: 600;
   cursor: pointer;
+  transition: background 0.2s ease;
 }
 
 .request-button:hover {
-  background: #000;
+  background: #444;
 }
 
-.request-card > p {
-  margin: 15px 0;
-  color: #666;
-  line-height: 1.6;
-}
-
-.request-card > a {
-  color: #222;
-  font-weight: bold;
+.request-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
 }
 
 @media (max-width: 600px) {
@@ -136,16 +130,29 @@
     padding: 40px 16px;
   }
 
-  .request-card {
-    padding: 24px 20px;
+  .request-header h1 {
+    font-size: 27px;
+  }
+
+  .request-form {
+    padding: 20px;
+  }
+
+  .request-property {
+    padding: 16px;
+  }
+}
+
+@media (max-width: 400px) {
+  .request-page {
+    padding: 30px 12px;
+  }
+
+  .request-form {
+    padding: 16px;
   }
 
   .request-header h1 {
-    font-size: 26px;
-  }
-
-  .request-form-row {
-    grid-template-columns: 1fr;
-    gap: 0;
+    font-size: 24px;
   }
 }

@@ -4,6 +4,14 @@ import { useAuth } from "../context/AuthContext";
 
 function PropertyCard({ property, isFavorite, onToggleFavorite }) {
     const { user } = useAuth();
+    const handleFavorite = () => {
+  if (!user) {
+    navigate("/login");
+    return;
+  }
+
+  toggleFavorite(property.id);
+};
     return(
         <article className="property-card">
             <div className="property-image-wrapper">
