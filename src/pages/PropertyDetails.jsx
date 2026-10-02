@@ -28,7 +28,8 @@ function PropertyDetails() {
   } = useFavorites();
 
   const property = properties.find(
-    (property) => property.id === Number(id)
+    (property) =>
+      property.id === Number(id)
   );
 
   if (!property) {
@@ -37,8 +38,8 @@ function PropertyDetails() {
         <h1>Property Not Found</h1>
 
         <p>
-          The property you're looking for doesn't
-          exist.
+          The property you're looking for
+          doesn't exist.
         </p>
 
         <Link to="/properties">
@@ -48,16 +49,17 @@ function PropertyDetails() {
     );
   }
 
-  const isFavorite = favorites.includes(property.id);
+  const isFavorite =
+    favorites.includes(property.id);
 
   const handleFavorite = () => {
-  if (!user) {
-    navigate("/login");
-    return;
-  }
+    if (!user) {
+      navigate("/login");
+      return;
+    }
 
-  toggleFavorite(property.id);
-};
+    toggleFavorite(property.id);
+  };
 
   const handleViewingRequest = () => {
     if (!user) {
@@ -65,28 +67,36 @@ function PropertyDetails() {
       return;
     }
 
-    navigate(`/properties/${property.id}/request-viewing`);
+    navigate(
+      `/properties/${property.id}/request-viewing`
+    );
   };
 
   return (
     <main className="property-details-page">
-      <PropertyHeader property={property} />
+      <PropertyHeader
+        property={property}
+      />
 
       <section className="property-gallery">
-        {property.images.map((image, index) => (
-          <img
-            key={image}
-            src={image}
-            alt={`${property.title} - view ${
-              index + 1
-            }`}
-          />
-        ))}
+        {property.images.map(
+          (image, index) => (
+            <img
+              key={image}
+              src={image}
+              alt={`${property.title} - view ${
+                index + 1
+              }`}
+            />
+          )
+        )}
       </section>
 
       <div className="property-details-layout">
         <div className="property-details-main">
-          <PropertyInfo property={property} />
+          <PropertyInfo
+            property={property}
+          />
 
           <PropertyAmenities
             amenities={property.amenities}
@@ -95,7 +105,7 @@ function PropertyDetails() {
 
         <aside className="property-action-card">
           <p className="action-price">
-            ₦{property.price.toLocaleString()}
+            ${property.price.toLocaleString()}
 
             <span> / month</span>
           </p>
@@ -111,7 +121,9 @@ function PropertyDetails() {
 
           <button
             className="viewing-button"
-            onClick={handleViewingRequest}
+            onClick={
+              handleViewingRequest
+            }
           >
             Request a Viewing
           </button>

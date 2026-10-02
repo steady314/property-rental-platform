@@ -9,7 +9,7 @@ import StatusMessage from "../components/StatusMessage";
 import "./RequestViewing.css";
 
 function RequestViewing() {
-  const { propertyId } = useParams();
+  const { id } = useParams();
 
   const navigate = useNavigate();
 
@@ -21,8 +21,8 @@ function RequestViewing() {
   } = useViewingRequests();
 
   const property = properties.find(
-    (item) => item.id === Number(propertyId)
-  );
+  (item) => item.id === Number(id)
+);
 
   const [date, setDate] = useState("");
   const [time, setTime] = useState("");
@@ -48,10 +48,18 @@ function RequestViewing() {
     );
   }
 
-  const getLocalDateString = (value = new Date()) => {
+  const getLocalDateString = (
+    value = new Date()
+  ) => {
     const year = value.getFullYear();
-    const month = String(value.getMonth() + 1).padStart(2, "0");
-    const day = String(value.getDate()).padStart(2, "0");
+
+    const month = String(
+      value.getMonth() + 1
+    ).padStart(2, "0");
+
+    const day = String(
+      value.getDate()
+    ).padStart(2, "0");
 
     return `${year}-${month}-${day}`;
   };
@@ -72,8 +80,13 @@ function RequestViewing() {
       return;
     }
 
-    const selectedDate = new Date(`${date}T00:00:00`);
-    const todayDate = new Date(`${today}T00:00:00`);
+    const selectedDate = new Date(
+      `${date}T00:00:00`
+    );
+
+    const todayDate = new Date(
+      `${today}T00:00:00`
+    );
 
     if (selectedDate < todayDate) {
       setError(
@@ -137,7 +150,7 @@ function RequestViewing() {
           <p>{property.location}</p>
 
           <p>
-            ₦{property.price.toLocaleString()} / year
+            ${property.price.toLocaleString()} / month
           </p>
         </div>
 
