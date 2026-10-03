@@ -1,16 +1,41 @@
 # Property Rental Platform
 
-A responsive property rental platform built with React and designed to simulate a real-world rental business workflow.
+A responsive property rental platform built with React to simulate a real-world rental business workflow.
 
-The application allows customers to browse properties, search and filter listings, save favorite properties, create accounts, request property viewings, and track their viewing requests.
+The application allows customers to browse and search properties, filter and sort listings, save favorite properties, create accounts, request property viewings, and track their viewing requests.
 
-Property managers can access a protected dashboard to review viewing requests and update their status.
+Property managers can access a protected dashboard to review customer viewing requests and update their status.
 
-## Overview
+Live Demo: https://property-rental-platform-sepia.vercel.app/
+
+GitHub Repository: https://github.com/steady314/property-rental-platform
+
+## Project Overview
 
 This project was built as a portfolio application to demonstrate practical frontend development skills using React.
 
-The project focuses on reusable components, application state, client-side routing, responsive UI, accessibility, authentication flows, protected routes, business workflows, and maintainable project structure.
+The application focuses on building a realistic rental workflow rather than a collection of isolated UI components. It demonstrates reusable component architecture, application state management, client-side routing, responsive UI, accessibility fundamentals, authentication flows, protected routes, form validation, and business workflows.
+
+### Business Workflow
+
+The platform supports two primary user roles:
+
+Customers
+
+* Discover and search properties
+* Filter and sort available listings
+* View detailed property information
+* Save favorite properties
+* Request property viewings
+* Track submitted viewing requests
+
+Property Managers
+
+* Access a protected management dashboard
+* Review customer viewing requests
+* View customer and property information
+* Approve or reject requests
+* Return requests to a pending state
 
 ## Features
 
@@ -26,8 +51,8 @@ The project focuses on reusable components, application state, client-side routi
 
 ### Customer Features
 
-* Register an account
-* Log in and log out
+* Account registration
+* Login and logout
 * Persistent login state
 * Save properties to favorites
 * View saved properties
@@ -54,8 +79,8 @@ The project focuses on reusable components, application state, client-side routi
 * Mobile, tablet, and desktop support
 * Accessible form labels
 * Keyboard focus states
-* Loading state component
-* Error state component
+* Loading states
+* Error states
 * Empty states
 * Form validation
 * Protected routes
@@ -63,17 +88,17 @@ The project focuses on reusable components, application state, client-side routi
 
 ## Demo Manager Account
 
-Use the following account to test the manager functionality:
+The following demonstration account can be used to test manager functionality:
 
-**Email**
+Email
 
 `manager@propertyrental.com`
 
-**Password**
+Password
 
 `manager123`
 
-This is a frontend demonstration account only.
+> This is a frontend demonstration account only.
 
 ## Tech Stack
 
@@ -104,7 +129,7 @@ src/
 
 ### Components
 
-Reusable interface elements such as:
+Reusable interface elements include:
 
 * Navbar
 * Footer
@@ -117,7 +142,7 @@ Reusable interface elements such as:
 
 ### Context
 
-Application-wide state is handled using React Context.
+Application-wide state is managed using React Context.
 
 Current contexts include:
 
@@ -127,7 +152,7 @@ Current contexts include:
 
 ### Pages
 
-The application separates major user experiences into individual pages, including:
+Major user experiences are separated into individual pages:
 
 * Home
 * Properties
@@ -143,25 +168,25 @@ The application separates major user experiences into individual pages, includin
 
 ## Getting Started
 
-Clone the repository:
+### Clone the repository
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/property-rental-platform.git
+git clone https://github.com/steady314/property-rental-platform.git
 ```
 
-Move into the project:
+### Move into the project directory
 
 ```bash
 cd property-rental-platform
 ```
 
-Install dependencies:
+### Install dependencies
 
 ```bash
 npm install
 ```
 
-Start the development server:
+### Start the development server
 
 ```bash
 npm run dev
@@ -189,30 +214,36 @@ npm run preview
 
 ## Screenshots
 
-Screenshots can be added here to demonstrate the main parts of the application.
+Screenshots can be added here to demonstrate the main application workflows.
 
-Suggested screenshots:
+Recommended screenshots:
 
 * Home page
-* Property listing page
-* Property details page
-* Favorites page
+* Property listings
+* Property details
+* Favorites
 * Viewing request form
-* My Requests page
+* My Requests
 * Manager dashboard
 * Manager request management
 
 ## Known Limitations
 
-This project currently uses frontend-only demonstration architecture.
+This project currently uses a frontend-only demonstration architecture.
 
-Authentication and user data are stored using browser localStorage. Password handling in this version is therefore not suitable for a real production authentication system.
+Authentication and user data are stored using browser `localStorage`. Password handling in this version is therefore **not suitable for a real production authentication system**.
 
 Property data is currently static rather than being retrieved from a backend API.
 
 Viewing requests are stored locally in the browser and are not shared between different devices or browsers.
 
-There are currently no real email notifications, payment processing, database integration, or server-side authentication.
+The current version does not include:
+
+* Real email notifications
+* Payment processing
+* Database integration
+* Server-side authentication
+* Backend API integration
 
 ## Future Improvements
 
@@ -222,7 +253,6 @@ Potential future development includes:
 * Secure server-side authentication
 * Password hashing
 * Database integration
-* Real property management
 * Property creation and editing
 * Cloud image storage
 * Email notifications
